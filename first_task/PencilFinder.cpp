@@ -6,7 +6,7 @@
 #include "PencilFinder.h"
 
 const uchar BLUE = 120;
-const uchar COLOR_REGION = 13;
+const uchar COLOR_REGION = 15;
 
 Mat concatenate(const Mat &first, const Mat &second) {
     if (first.rows != second.rows || first.cols != second.cols) {

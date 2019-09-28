@@ -13,7 +13,7 @@
 //
 //FastU1CAccessor accessor;
 //
-//void checkAndPush(int y, int x, std::queue<cords_t> &queue) {
+//void checkAndPush(int y, int x, std::queue<cords> &queue) {
 //    if (y < 0 || y >= accessor.rows)
 //        return;
 //
@@ -30,8 +30,8 @@
 //    queue.push(CORDS(x, y));
 //}
 //
-//void checkNextComponent(cords_t start, std::vector<cords_t> &component) {
-//    std::queue<cords_t> queue;
+//void checkNextComponent(cords start, std::vector<cords> &component) {
+//    std::queue<cords> queue;
 //    queue.push(start);
 //
 //    while (!queue.empty()) {
@@ -50,9 +50,9 @@
 //    }
 //}
 //
-//void eraseNoises(std::vector<cords_t> &filledPixels) {
+//void eraseNoises(std::vector<cords> &filledPixels) {
 //    uchar **data = accessor.accessor;
-//    std::vector<cords_t> component;
+//    std::vector<cords> component;
 //
 //    for (auto it = filledPixels.begin(); it != filledPixels.end(); it++) {
 //        auto x = CORDS_X(*it);
@@ -81,7 +81,7 @@
 //    const uchar minBlue = BLUE - BLUE_PRECISION;
 //    const uchar maxBlue = BLUE + BLUE_PRECISION;
 //
-//    std::vector<cords_t> filledPixels;
+//    std::vector<cords> filledPixels;
 //
 //    for (int y = 0; y < rows; y++) {
 //        memset(visited[y], 0, cols);
