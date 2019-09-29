@@ -77,8 +77,7 @@ Mat PencilFinder::FindPencils(Mat &source) {
                 floodFill(binarized, Point(j, i), Scalar(100), &rect, 4);
 
                 if (rect.height * 2 > rect.width * 3 || rect.width * 2 > rect.height * 3) {
-                    rectangle(binarized, rect, Scalar(100));
-                    rectangle(source, rect, Scalar(255, 0, 0));
+                    rectangle(source, rect, Scalar(0, 255, 0), 4);
                 }
             }
         }
