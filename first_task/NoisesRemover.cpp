@@ -312,12 +312,12 @@ void NoisesRemover::removeNoisesFrom(cv::Mat &mat) {
     auto components = traverser.getComponents();
 
     for (auto c: components) {
-        traverser.makeErosionOf(c, 10);
+        traverser.makeErosionOf(c, 7);
     }
 
     traverser.clearVisitedTable();
 
     for (auto c: components) {
-        traverser.makeDilatationOf(c, 15);
+        traverser.makeDilatationOf(c, 12);
     }
 }
