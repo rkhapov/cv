@@ -50,7 +50,7 @@ Mat binarizeByBlue(const Mat &source) {
         for (int j = 0; j < cols; j++) {
             auto &pixel = line[j];
 
-            if (saturationLine[j] > 70 && valueLine[j] > 40 && min <= pixel && pixel <= max) {
+            if (saturationLine[j] > 70 && valueLine[j] > 50 && min <= pixel && pixel <= max) {
                 pixel = 255;
             }
             else {
