@@ -9,7 +9,7 @@ const char *windowName = "moving circles";
 
 const int MinRadius = 20;
 const int MaxRadius = 40;
-const int CirclesAmount = 20;
+const int CirclesAmount = 50;
 const double PixelMass = 0.00000001;
 const int DelayInMilliseconds = 30;
 const double epsilon = 0.001;
@@ -163,8 +163,9 @@ void drawCircles(std::vector<Circle> &circles, Mat &image) {
 
 void updateCircles(Mat &flow, std::vector<Circle> &circles) {
     double dt = DelayInMilliseconds / 1000.0;
+    int size = (int)circles.size();
 
-    for (int i = 0; i < circles.size(); i++) {
+    for (int i = 0; i < size; i++) {
         circles[i].updateByFlow(flow, dt);
     }
 }
@@ -250,7 +251,7 @@ void startGame(VideoCapture &camera) {
 }
 
 
-int main( int argc, char** argv )
+int main()
 {
     std::srand(std::time(0));
     cv::VideoCapture camera(0);
