@@ -9,13 +9,14 @@ const char *windowName = "moving circles";
 
 const int MinRadius = 20;
 const int MaxRadius = 40;
-const int CirclesAmount = 50;
+const int CirclesAmount = 10;
 const double PixelMass = 0.00000001;
 const int DelayInMilliseconds = 30;
 const double epsilon = 0.001;
 const double k = 0.75;
 
-int height, width;
+int height = 480;
+int width = 640;
 
 int getRandomNumber(int min, int max) {
     int num = (std::rand() % (max - min + 1)) + min;
@@ -204,11 +205,7 @@ void startGame(VideoCapture &camera) {
         std::exit(1);
     }
 
-
     std::vector<Circle> circles;
-
-    height = (int) camera.get(CV_CAP_PROP_FRAME_HEIGHT);
-    width = (int) camera.get(CV_CAP_PROP_FRAME_WIDTH);
 
     generateCircles(circles,0, height,0, width, CirclesAmount);
 
@@ -219,20 +216,21 @@ void startGame(VideoCapture &camera) {
             std::exit(1);
         }
 
-        cvtColor(current, currentBG, COLOR_BGR2GRAY);
-        cvtColor(previous, previousBG, COLOR_BGR2GRAY);
+            cvtColor(current, currentBG, COLOR_BGR2GRAY);
+            cvtColor(previous, previousBG, COLOR_BGR2GRAY);
 
-        calcOpticalFlowFarneback(
-                previousBG,
-                currentBG,
-                flow,
-                0.5,
-                5,
-                5,
-                3,
-                7,
-                1.5,
-                cv::OPTFLOW_FARNEBACK_GAUSSIAN);
+            calcOpticalFlowFarneback(
+                    previousBG,
+                    currentBG,
+                    flow,
+                    0.5,
+                    5,
+                    5,
+                    3,
+                    7,
+                    1.5,
+                    cv::OPTFLOW_FARNEBACK_GAUSSIAN);
+
         current.copyTo(result);
 
 
@@ -247,6 +245,7 @@ void startGame(VideoCapture &camera) {
             break;
 
         swap(current, previous);
+
     }
 }
 
@@ -255,6 +254,9 @@ int main()
 {
     std::srand(std::time(0));
     cv::VideoCapture camera(0);
+
+    camera.set(CV_CAP_PROP_FRAME_WIDTH, width);
+    camera.set(CV_CAP_PROP_FRAME_HEIGHT, height);
 
     if(!camera.isOpened()) {
         std::cout << "Cant capture video from camera" << std::endl;
