@@ -9,11 +9,11 @@ const char *windowName = "moving circles";
 
 const int MinRadius = 20;
 const int MaxRadius = 40;
-const int CirclesAmount = 10;
-const double PixelMass = 0.00000001;
+const int CirclesAmount = 20;
+const double PixelMass = 0.0000005;
 const int DelayInMilliseconds = 30;
 const double epsilon = 0.001;
-const double k = 0.75;
+const double k = 0.95;
 
 int height = 480;
 int width = 640;
@@ -196,6 +196,11 @@ void flowToDrawable(Mat &flow, Mat &drawable) {
 }
 
 
+void drawArrows(Mat flow, Mat output) {
+
+}
+
+
 void startGame(VideoCapture &camera) {
     cv::Mat flow, current, previous, previousBG, currentBG, result;
     cv::namedWindow(windowName, CV_WINDOW_AUTOSIZE );
@@ -216,20 +221,20 @@ void startGame(VideoCapture &camera) {
             std::exit(1);
         }
 
-            cvtColor(current, currentBG, COLOR_BGR2GRAY);
-            cvtColor(previous, previousBG, COLOR_BGR2GRAY);
+        cvtColor(current, currentBG, COLOR_BGR2GRAY);
+        cvtColor(previous, previousBG, COLOR_BGR2GRAY);
 
-            calcOpticalFlowFarneback(
-                    previousBG,
-                    currentBG,
-                    flow,
-                    0.5,
-                    5,
-                    5,
-                    3,
-                    7,
-                    1.5,
-                    cv::OPTFLOW_FARNEBACK_GAUSSIAN);
+        calcOpticalFlowFarneback(
+                previousBG,
+                currentBG,
+                flow,
+                0.5,
+                5,
+                5,
+                3,
+                7,
+                1.5,
+                cv::OPTFLOW_FARNEBACK_GAUSSIAN);
 
         current.copyTo(result);
 
